@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>sd wasm demo</title>
+</head>
+<body>
+<script type="module">
+import init, { generate_x25519_keypair, hpke_encrypt } from '../pkg/sd_wasm.js';
+
+async function run() {
+    await init();
+    const kp = generate_x25519_keypair();
+    console.log('public key', new Uint8Array(kp.public_key));
+    const msg = new TextEncoder().encode('hello');
+    const res = hpke_encrypt(kp.public_key, msg);
+    console.log('enc', new Uint8Array(res.enc));
+    console.log('ct', new Uint8Array(res.ct));
+}
+run();
+</script>
+</body>
+</html>

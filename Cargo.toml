@@ -1,0 +1,3 @@
+[workspace]
+members = ["sd_wasm"]
+resolver = "2"
