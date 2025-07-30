@@ -11,5 +11,6 @@ wasm-bindgen = "0.2"
 libcrux-ecdh = "0.0.3"
 hpke-rs = { version = "0.3", default-features = false }
 hpke-rs-libcrux = { version = "0.3", default-features = false }
+getrandom = { version = "0.3.2", features = ["wasm_js"] }
 rand_core = { version = "0.9", features = ["os_rng"] }
 rand = { version = "0.9", features = ["std"] }
