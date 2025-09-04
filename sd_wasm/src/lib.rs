@@ -1,5 +1,6 @@
 use wasm_bindgen::prelude::*;
 use libcrux_ecdh as ecdh;
+use libcrux_ml_kem::mlkem768::{rand as mlkem_rand};
 use hpke_rs::{self as hpke};
 use hpke_rs::hpke_types::{AeadAlgorithm, KemAlgorithm, KdfAlgorithm};
 use hpke_rs::Mode;
@@ -33,6 +34,16 @@ pub fn generate_x25519_keypair() -> KeyPair {
     KeyPair {
         private_key: sk,
         public_key: pk,
+    }
+}
+
+#[wasm_bindgen]
+pub fn generate_mlkem_keypair() -> KeyPair {
+    let mut rng = StdRng::from_os_rng();
+    let kp = mlkem_rand::generate_key_pair(&mut rng);
+    KeyPair {
+        private_key: kp.sk().as_ref().to_vec(),
+        public_key: kp.pk().as_ref().to_vec(),
     }
 }
 
