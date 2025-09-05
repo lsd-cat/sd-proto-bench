@@ -1,0 +1,31 @@
+[package]
+name = "securedrop-protocol"
+version = "0.1.0"
+edition = "2024"
+authors = ["redshiftzero <jen@freedom.press>"]
+description = "A wip impl of the securedrop protocol"
+license = "GPL-3.0"
+
+[lib]
+crate-type = ["rlib", "cdylib"]
+
+[dependencies]
+libcrux-ed25519 = { git = "https://github.com/cryspen/libcrux", features = ["rand"], rev="54c6624630e47ed599ffc1549101c2b861d51a8c" }
+# using git rev bc X25519 struct was unavailable in latest release on crates
+libcrux-curve25519 = { git = "https://github.com/cryspen/libcrux", rev="54c6624630e47ed599ffc1549101c2b861d51a8c" }
+libcrux-chacha20poly1305 = { git = "https://github.com/cryspen/libcrux", rev="54c6624630e47ed599ffc1549101c2b861d51a8c" }
+libcrux-traits = { git = "https://github.com/cryspen/libcrux", rev="54c6624630e47ed599ffc1549101c2b861d51a8c" }
+libcrux-kem = { git = "https://github.com/cryspen/libcrux", rev="54c6624630e47ed599ffc1549101c2b861d51a8c" }
+hpke-rs = {version = "0.3.0", features = ["libcrux"]}
+rand_core = {version = "0.9"}
+rand = {version = "0.9"}
+# Needed for wasm compat
+getrandom = {version = "0.3", features = ["wasm_js"]}
+anyhow = "1.0"
+hashbrown = {version = "0.14", features = ["raw"]}
+uuid = {version = "1.0", features = ["v4", "rng-getrandom"]}
+blake2 = "0.10"
+wasm-bindgen = { version = "0.2", default-features = false, features = ["std"] }
+
+[dev-dependencies]
+proptest = "1.3"
