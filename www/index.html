@@ -10,6 +10,9 @@ import init, { generate_x25519_keypair, hpke_encrypt } from '../pkg/sd_wasm.js';
 
 async function run() {
     await init();
+    // Expose wasm functions globally so Playwright can access them
+    window.generate_x25519_keypair = generate_x25519_keypair;
+    window.hpke_encrypt = hpke_encrypt;
     const kp = generate_x25519_keypair();
     console.log('public key', new Uint8Array(kp.public_key));
     const msg = new TextEncoder().encode('hello');

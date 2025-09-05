@@ -1,0 +1,9 @@
+{
+  "name": "sd-proto-bench",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Benchmark hpke-rs in headless browsers using Playwright",
+  "devDependencies": {
+    "playwright": "^1.41.1"
+  }
+}
